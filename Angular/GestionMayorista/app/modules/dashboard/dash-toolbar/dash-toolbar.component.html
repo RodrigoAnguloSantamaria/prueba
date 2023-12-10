@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="newStyle">
+  <mat-toolbar-row class="ps-0 newStyle">
+   
+    <!-- <span>Gestion de actividad</span> -->
+    <span class="example-spacer"></span>
+
+    <a class="nav-link d-none d-sm-block" href="/login">
+      <i class="bi bi-person-circle"></i>
+      {{username}}
+    </a>
+    <button class="m-4 btn-custom" mat-flat-button color="primary" (click)="logout()">
+      Cerrar sesión
+      <i class="bi bi-box-arrow-right" ></i>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

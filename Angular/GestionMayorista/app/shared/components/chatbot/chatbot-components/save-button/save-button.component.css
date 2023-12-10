@@ -1,0 +1,14 @@
+
+
+button{
+    font-size: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 8px;
+  }

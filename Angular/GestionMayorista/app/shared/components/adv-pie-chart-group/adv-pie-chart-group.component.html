@@ -1,0 +1,52 @@
+<ng-container *ngIf="cardChartComponentList.length !== 0; else elseTemplate">
+  <div
+    class="container-fluid"
+    *ngFor="let customCardData of cardChartComponentList"
+  >
+    <div class="row text-center mb-3">
+      <!-- Card 1 -->
+      <div class="card">
+        <div #ContainerRef class="card-body">
+          <h2 class="card-title mb-1">{{ customCardData.cardTitle }}</h2>
+          <p class="inline card-text mb-1">
+            <small *ngFor="let id of ids">
+              <ng-container *ngIf="id == ids[1]; else elseTemplate">
+                en <strong>{{ id | idToNamePipe }}</strong>
+              </ng-container>
+              <ng-template #elseTemplate>
+                Para <strong>{{ id | idToNamePipe }}</strong>
+              </ng-template> </small
+            >.
+          </p>
+
+          <ngx-charts-advanced-pie-chart
+            [view]="[ContainerRef.offsetWidth / 1.05, 250]"
+            (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.05)"
+            scheme="cool"
+            [results]="customCardData.data"
+            [valueFormatting]="customCardData.chatValueFormatting"
+            [nameFormatting]="customCardData.chatNameFormatting"
+            [label]="customCardData.chartTotalLabel"
+            [animations]="false"
+            (select)="onSelect($event)"
+          >
+            <ng-template #tooltipTemplate let-model="model">
+              <app-custom-chart-tooltip
+                [name]="model.name"
+                [nameType]="customCardData.tooltipNameType"
+                [value]="model.value"
+                [valueType]="customCardData.tooltipValueType"
+              ></app-custom-chart-tooltip>
+            </ng-template>
+          </ngx-charts-advanced-pie-chart>
+          <!-- <a href="#" class="btn btn-primary"
+              >Exportar, agrandar o ordenar datos por X?</a
+            > -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <app-loading></app-loading>
+</ng-template>

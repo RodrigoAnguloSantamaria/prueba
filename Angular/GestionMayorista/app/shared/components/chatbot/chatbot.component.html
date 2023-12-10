@@ -1,0 +1,108 @@
+<button title="Abrir ChatBot" *ngIf="!chatbotVisible" class="btn btn-primary chatbot-btn" (click)="toggleChatbot()">
+  <i class="bi bi-chat-dots"></i>
+</button>
+
+<div *ngIf="chatbotVisible" class="chatbot-container" #resizableContainer mwlResizable [enableGhostResize]="true"
+  (resizeEnd)="onResizeEnd($event)">
+  <div class="resize-handle-top" mwlResizeHandle [resizeEdges]="{ top: true }"></div>
+  <div class="resize-handle-left" mwlResizeHandle [resizeEdges]="{ left: true }"></div>
+
+  <div class="chatbot-header">
+    <!-- <button title="Redimensionar el Chat" class="expand-btn" (click)="expandChatbot()">
+      <i *ngIf="expanded" class="bi bi-arrows-angle-expand text-white"></i>
+      <i *ngIf="!expanded" class="bi bi-arrows-angle-contract text-white"></i>
+    </button> -->
+    <div class="btn-group" style="margin: 10px">
+      <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+        (click)="conversationsUser()">
+        Historial
+      </button>
+      <ul class="dropdown-menu dropdown-menu-center">
+        <!-- Aquí van los elementos del dropdown -->
+        <li *ngFor="let conversation of conversations; let i = index" class="conversations_li">
+          <a class="dropdown-item btn btn-link" (click)="getConversation(conversation.id)">
+            {{ i + 1 }}-{{ conversation.title }}
+            <p class="chatbot-date custom-date">{{ conversation.date }}</p>
+          </a>
+          <i class="bi bi-pencil-fill float-end" matTooltip="Cambiar título"
+            style="font-size: 0.8rem; color: rgb(19, 212, 35)" (click)="editTitleDialog(conversation)" alt="Editar"></i>
+          <i class="bi bi-trash-fill float-end" matTooltip="Borrar conversación." style="font-size: 0.8rem; color: red"
+            (click)="openDialog(conversation.id)" alt="Borrar"></i>
+        </li>
+      </ul>
+    </div>
+
+    <h3 *ngIf="fullConversation.title" alt="Editar">
+      <span style="cursor: pointer" matTooltip="Cambiar título" (click)="editTitleDialog(fullConversation)">
+        {{ fullConversation.title }}</span>
+      <i class="bi bi-save" style="cursor: pointer" matTooltip="Guardar"  (click)="saveConversation()"> </i>
+    </h3>
+
+    <h3 *ngIf="!fullConversation.title && conversationsNumber>=5" alt="Editar">
+      <span style="color: red;" matTooltip="Máximo de 5 conversaciones guardadas.">Sin título</span><i class="bi bi-save" style="color:red;"></i>
+    </h3>
+    <h3 *ngIf="!fullConversation.title && conversationsNumber<5" alt="Editar">
+
+      <span *ngIf="messages.length > 1" style="color: red; cursor:pointer;" matTooltip="Cambiar título." (click)="editTitleDialog(fullConversation)">Sin título</span>
+      <span *ngIf="messages.length <= 1" style="color: red; cursor:pointer;" matTooltip="Cambiar título habilitado cuando inicie conversación.">Sin título</span>
+      <i class="bi bi-save" style="cursor: pointer" style="color:red;" matTooltip="Cambiar título antes de guardar."> </i>
+    </h3>
+
+
+    <button id="show-chatbot-btn" class="show-chatbot-btn" (click)="toggleChatbot()" title="Ocultar Chat">
+      <i class="bi bi-eye-slash-fill text-white"></i>
+    </button>
+  </div>
+
+  <div class="chatbot-messages" id="messagesContainer" #messagesContainer>
+    <p class="chatbot-date">
+      <span *ngIf="fullConversation.title"><strong>{{ fullConversation.title }} </strong>
+      </span>
+      {{ fullConversation.date }}
+    </p>
+    <div *ngFor="let message of messages; let j = index" class="chatbot-message">
+      <div *ngIf="message.type === 'user'" class="user-message">
+        <i class="bi bi-person-circle"></i>{{ message.text }}
+      </div>
+      <div *ngIf="message.type === 'bot'">
+        <div *ngIf="message.type === 'bot'" class="bot-message">
+          <i class="bi bi-robot"></i> {{ message.text }}
+          <hr />
+          <div class="suggestion" *ngIf="j != 0">
+            <hr />
+            <ul>
+              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <p>
+            <i class="bi bi-clipboard" title="Copiar" [cdkCopyToClipboard]="message.text"></i>
+            <span>{{ time }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="chatbot-date" [ngStyle]="{ visibility: responseLoaded ? 'visible' : 'hidden' }">
+      <mat-spinner #spinner [diameter]="30"> </mat-spinner>
+    </div>
+    <app-chatbot-buttons *ngIf="!responseLoaded && messages.length > 1" [title]="fullConversation.title"
+      [conversations]="conversations"></app-chatbot-buttons>
+  </div>
+
+  <div class="chatbot-input">
+    <!-- <button title="Limpiar Chat" (click)="cleanChat()" class="bg-danger me-2">
+      <i class="bi bi-trash3"></i>
+    </button> -->
+    <textarea [(ngModel)]="userMessage" #textArea placeholder="Escriba el mensaje aqui..." (input)="activeSendBtn()"
+      [disabled]="activeArea"></textarea>
+    <button title="Enviar mensaje" (click)="sendMessage()" class=" " *ngIf="!botMessage" [disabled]="activeBtn">
+      <i class="bi bi-send"></i>
+    </button>
+    <!-- Si botMessage es falso -->
+    <button title="Cancelar Envio" (click)="cutConexion()" class="pause-btn" *ngIf="botMessage">
+      <!-- <i class="bi bi-x-octagon btn btn-danger"></i> -->
+      <i class="bi bi-stop-fill"></i>
+    </button>
+  </div>
+</div>

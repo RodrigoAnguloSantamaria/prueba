@@ -1,0 +1,16 @@
+<div
+  class="d-flex align-items-center justify-content-around"
+  style="min-width: 280px; max-width: 500px"
+>
+  <div class="col-2 text-start">
+    <mat-icon>{{ data?.icon }}</mat-icon>
+  </div>
+  <div class="col-8" text-center>
+    <span class="flex-grow-1 bg-transparent">{{
+      data?.message
+    }}</span>
+  </div>
+  <div class="col-2 text-end">
+    <mat-icon (click)="snackBarRef.dismiss()">close</mat-icon>
+  </div>
+</div>

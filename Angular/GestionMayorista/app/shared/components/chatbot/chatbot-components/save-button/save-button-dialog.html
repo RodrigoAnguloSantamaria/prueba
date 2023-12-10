@@ -1,0 +1,18 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+  <p>Introduce un tÍtulo</p>
+  <mat-form-field>
+    <mat-label>TÍtulo</mat-label>
+    <input matInput [(ngModel)]="data.title" placeholder="Introduce título" maxlength="20" (input)="limitLength($event)">
+    <!-- NO MUESTRA EL MENSAJE DE ERROR -->
+  </mat-form-field>
+  <div *ngIf="maxTitleLength" style="font-size: 10px; color: red;">
+    Máximo de 20 caracteres.
+  </div>
+
+</div>
+<div mat-dialog-actions>
+
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button  #button [mat-dialog-close]="data.title" [disabled]="enableSaveBtn" >Guardar</button>
+</div>

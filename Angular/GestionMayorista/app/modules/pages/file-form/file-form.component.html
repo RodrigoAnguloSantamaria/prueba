@@ -1,0 +1,332 @@
+<form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
+    <h2 class="newH1Style mt-3"> Ficha {{tipoFicha}}</h2>
+
+    <div class="container">
+        <div class="fila">
+
+            <!-- NUMERO DE EXPEDIENTE -->
+            <div class="form-group">
+                <label for="numexpediente">
+                    Num. Expediente
+                    <span *ngIf="isSubmitted && this.fileForm.get('numexpediente')?.errors?.['required']">
+                        Obligatorio
+                    </span>
+                    <span *ngIf="isSubmitted && this.fileForm.get('numexpediente')?.errors?.['minlength']">
+                        Tiene que introducir mínimo 5 caracteres
+                    </span>
+                </label>
+                <input type="text" class="form-control form-control-sm" id="numexpediente"
+                    formControlName="numexpediente" />
+            </div>
+
+            <!-- CENTRO DE GASTO -->
+            <div class="form-group">
+                <label for="cgasto">C. Gasto</label>
+                <select class="form-control form-control-sm" id="cgasto" formControlName="cgasto">
+                    <option *ngFor="let centro of centrosGasto" [value]="centro">{{centro}}</option>
+                </select>
+            </div>
+            <!-- TITULO / TEXTO -->
+            <div class="form-group" style="flex-grow: 2;">
+                <label for="texto">
+                    Título
+                    <span *ngIf="isSubmitted && this.fileForm.get('texto')?.errors?.['required']">
+                        Obligatorio
+                    </span>
+                    <span *ngIf="isSubmitted && this.fileForm.get('texto')?.errors?.['minlength']">
+                        Tiene que introducir mínimo 10 caracteres
+                    </span>
+                </label>
+                <input type="text" class="form-control form-control-sm" id="texto" formControlName="texto" />
+            </div>
+        </div>
+
+        <div class="fila">
+            <!-- PROCEDIMIENTO -->
+            <div class="form-group">
+                <label for="procedimiento">Procedimiento</label>
+                <select class="form-control form-control-sm" id="procedimiento" formControlName="procedimiento">
+                    <option *ngFor="let procedimiento of procedimientos" [value]="procedimiento">{{procedimiento}}
+                    </option>
+                </select>
+            </div>
+            <!-- SERVICIO -->
+            <div class="form-group">
+                <label for="servicio">Servicio</label>
+                <select class="form-control form-control-sm" id="servicio" formControlName="servicio">
+                    <option *ngFor="let servicio of servicios" [value]="servicio">{{servicio}}</option>
+                </select>
+            </div>
+
+            <!-- PROGRAMA -->
+            <div class="form-group">
+                <label for="programa">Programa</label>
+                <select class="form-control form-control-sm" id="programa" formControlName="programa">
+                    <option *ngFor="let programa of programas" [value]="programa">{{programa}}</option>
+                </select>
+            </div>
+            <!--TIPO DE PRESUPUESTO -->
+            <div class="form-group">
+                <label for="tipopresupuesto">Tipo presup.</label>
+                <select class="form-control form-control-sm" id="tipopresupuesto" formControlName="tipopresupuesto">
+                    <option *ngFor="let tipo of tiposPresupuesto" [value]="tipo">{{tipo}}</option>
+                </select>
+            </div>
+            <!-- AÑO -->
+            <div class="form-group">
+                <label for="year">Año</label>
+                <input type="number" class="form-control form-control-sm" id="year" formControlName="year" />
+            </div>
+            <!-- DURACION -->
+            <div class="form-group">
+                <label for="duracion">Duración</label>
+                <select class="form-control form-control-sm" id="duracion" formControlName="duracion">
+                    <option *ngFor="let duracion of duraciones" [value]="duracion">{{duracion}}</option>
+                </select>
+            </div>
+            <!-- LOTE -->
+            <div class="form-group">
+                <label for="lote">Lote</label>
+                <input type="number" class="form-control form-control-sm" id="lote" formControlName="lote" />
+            </div>
+            <!-- GRUPO -->
+            <div class="form-group">
+                <label for="grupo">Grupo</label>
+                <select class="form-control form-control-sm" id="grupo" formControlName="grupo">
+                    <option *ngFor="let grupo of grupos" [value]="grupo">{{grupo}}</option>
+                </select>
+            </div>
+            <!-- SITUACION -->
+            <div class="form-group">
+                <label for="situacion">
+                    Situacion
+                    <span *ngIf="isSubmitted && this.fileForm.get('situacion')?.errors?.['required']">
+                        Obligatorio
+                    </span>
+
+                </label>
+                <select class="form-control form-control-sm" id="situacion" formControlName="situacion">
+                    <option *ngFor="let situacion of situaciones" [value]="situacion">{{situacion}}</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+        <div class="fila">
+            <!-- FECHA ALTA -->
+            <div class="form-group">
+                <label for="fechaAlta">Fecha de Alta</label>
+                <input type="date" class="form-control form-control-sm" id="fechaAlta" formControlName="fechaAlta" />
+            </div>
+            <!-- FECHA LANZADO -->
+            <div class="form-group">
+                <label for="fechaLanzado">F. Lanzado</label>
+                <input type="date" class="form-control form-control-sm" id="fechaLanzado"
+                    formControlName="fechaLanzado" />
+            </div>
+            <!-- FECHA INICIO CONTRATO -->
+            <div class="form-group">
+                <label for="fechaInicioContrato">F. Inicio contrato</label>
+                <input type="date" class="form-control form-control-sm" id="fechaInicioContrato"
+                    formControlName="fechaInicioContrato" />
+            </div>
+            <!-- FECHA FIN CONTRATO -->
+            <div class="form-group">
+                <label for="fechaFinContrato">F. Fin Contrato</label>
+                <input type="date" class="form-control form-control-sm" id="fechaFinContrato"
+                    formControlName="fechaFinContrato" />
+            </div>
+
+
+        </div>
+        <div class="fila">
+            <!-- OBSERVACIONES -->
+            <div class="form-group">
+                <label for="observaciones">Observaciones</label>
+            </div>
+            <textarea class="form-control" name="observaciones" id="observaciones" cols="40" rows="2"
+                formControlName="observaciones"></textarea>
+        </div>
+        <div class="fila">
+            <table>
+                <tr>
+                    <th class="label_header">RC</th>
+                    <th class="label_header">A</th>
+                    <th class="label_header" h>D</th>
+                    <th class="label_header">OK</th>
+                </tr>
+                <tr>
+                    <td> <input type="number" class="form-control form-control-sm" id="rc" formControlName="rc" /></td>
+                    <td><input type="number" class="form-control form-control-sm" id="asignado"
+                            formControlName="asignado" /></td>
+                    <td> <input type="number" class="form-control form-control-sm" id="dispuesto"
+                            formControlName="dispuesto" /></td>
+                    <td> <input type="number" class="form-control form-control-sm" id="ok" formControlName="ok" /></td>
+                </tr>
+            </table>
+            <!-- RC -->
+
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-custom">Grabar ficha {{tipoFicha}}</button>
+    </div>
+
+
+
+
+
+    <div class="container">
+
+        <mat-tab-group>
+            <mat-tab label="Trámites">
+                <ng-container formArrayName="tramites">
+                    <i class="bi bi-file-plus-fill tabicon" (click)="addTramite()"></i>
+                    <ng-container *ngFor="let tramiteForm of tramites.controls; let i = index">
+                        <div class="fila" [formGroupName]="i">
+                            <!-- FECHA FIN CONTRATO -->
+                            <div class="form-group">
+                                <label for="fechatramite">Fecha</label>
+                                <input type="date" class="form-control form-control-sm" id="fechatramite"
+                                    formControlName="fechatramite" />
+                            </div>
+                            <!-- OBSERVACIONES -->
+                            <div class="form-group" style="flex-grow: 2;">
+                                <label for="observacionestramite">
+                                    Observaciones
+
+                                </label>
+                                <input type="text" class="form-control form-control-sm" id="observacionestramite"
+                                    formControlName="observacionestramite" />
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+                </ng-container>
+
+            </mat-tab>
+            <ng-container *ngIf="this.fileForm.get('lote')?.value>=1">
+                <mat-tab label="Lotes">
+
+                    <ng-container formArrayName="lotes">
+                        <i class="bi bi-file-plus-fill tabicon" (click)="addLote()"></i>
+                        <ng-container *ngFor="let loteForm of lotes.controls; let i = index">
+                            <div [formGroupName]="i">
+                                <div class="fila">
+                                    <!-- NUM LOTE -->
+                                    <div class="form-group">
+                                        <label for="numlote">Nº Lote</label>
+                                        <input type="number" class="form-control form-control-sm" id="numlote"
+                                            formControlName="numlote" />
+                                    </div>
+                                    <!-- MATERIAL -->
+                                    <div class="form-group">
+                                        <label for="material"> Material</label>
+                                        <input type="text" class="form-control form-control-sm" id="material"
+                                            formControlName="material" />
+                                    </div>
+                                    <!-- UYNIDADES -->
+                                    <div class="form-group">
+                                        <label for="unidades">Unidades</label>
+                                        <input type="number" class="form-control form-control-sm" id="unidades"
+                                            formControlName="unidades" />
+                                    </div>
+                                    <!-- IMPORTE -->
+                                    <div class="form-group">
+                                        <label for="importe">Importe</label>
+                                        <input type="number" class="form-control form-control-sm" id="importe"
+                                            formControlName="importe" />
+                                    </div>
+                                    <!-- ECONOMICA -->
+                                    <div class="form-group">
+                                        <label for="economica">Economica</label>
+                                        <input type="text" class="form-control form-control-sm" id="economica"
+                                            formControlName="economica" />
+                                    </div>
+                                    <!-- ESTADO -->
+                                    <div class="form-group">
+                                        <label for="estado"> Estado </label>
+                                        <select class="form-control form-control-sm" id="estado"
+                                            formControlName="estado">
+                                            <option *ngFor="let estado of situaciones" [value]="estado">{{estado}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="fila">
+                                    <!-- PRORROGA -->
+                                    <div class="form-group">
+                                        <label for="prorroga">Prorroga</label>
+                                        <input type="text" class="form-control form-control-sm" id="prorroga"
+                                            formControlName="prorroga" />
+                                    </div>
+                                    <!-- EMPRESA -->
+                                    <div class="form-group">
+                                        <label for="empresa"> Empresa </label>
+                                        <select class="form-control form-control-sm" id="empresa"
+                                            formControlName="empresa">
+                                            <option *ngFor="let empresa of empresas" [value]="empresa">{{empresa}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- FAMILIA -->
+                                    <div class="form-group">
+                                        <label for="familia"> Familia </label>
+                                        <select class="form-control form-control-sm" id="familia"
+                                            formControlName="familia">
+                                            <option *ngFor="let familia of familias" [value]="familia">{{familia}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- DESTINO -->
+                                    <div class="form-group">
+                                        <label for="destino"> Destino </label>
+                                        <select class="form-control form-control-sm" id="destino"
+                                            formControlName="destino">
+                                            <option *ngFor="let destino of destinos" [value]="destino">{{destino}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- INICIO LOTE -->
+                                    <div class="form-group">
+                                        <label for="inicioLote">Inicio lote</label>
+                                        <input type="date" class="form-control form-control-sm" id="inicioLote"
+                                            formControlName="inicioLote" />
+                                    </div>
+                                    <!-- FIN LOTE -->
+                                    <div class="form-group">
+                                        <label for="finLote">Fin lote</label>
+                                        <input type="date" class="form-control form-control-sm" id="finLote"
+                                            formControlName="finLote" />
+                                    </div>
+                                </div>
+                                <div class="fila">
+                                    <!-- OBSERVACIONES -->
+                                    <div class="form-group">
+                                        <label for="observaciones">Observaciones</label>
+                                    </div>
+                                    <textarea class="form-control" name="observaciones" id="observaciones" cols="40"
+                                        rows="2" formControlName="observaciones"></textarea>
+                                </div>
+                                <button class="btn btn-primary btn-custom" (click)="addAnualidad(i)">ANUALIDAD</button>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
+
+                </mat-tab>
+                <mat-tab label="Certificaciones"> Certificaciones </mat-tab>
+                <mat-tab label="Documentos"> Documentos </mat-tab>
+                <mat-tab label="D.SIC"> D. SIC </mat-tab>
+            </ng-container>
+
+        </mat-tab-group>
+    </div>
+
+
+
+
+
+</form>

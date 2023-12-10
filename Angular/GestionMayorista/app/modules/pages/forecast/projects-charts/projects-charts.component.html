@@ -1,0 +1,125 @@
+<div #ContainerRef class="container row gap-3 m-0 text-center">
+  <div class="row card pb-5 pe-4">
+    <h4 class="mt-3 pb-0 mb-0">
+      Grafica que muestra el coste estimado frente al coste real de cada
+      proyecto.
+    </h4>
+    <div class="card-body mt-0 pt-0 ">
+      <ngx-charts-bar-vertical-2d
+        [view]="view"
+        (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.1)"
+        scheme="cool"
+        [results]="seriesDataCost"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        legendTitle="Coste"
+        [legendPosition]="legendPosition"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisTickFormatting]="costYAxisTickFormatting"
+        [barPadding]="0"
+        [groupPadding]="1"
+        [showDataLabel]="true"
+        [dataLabelFormatting]="costYAxisTickFormatting"
+        [roundDomains]="false"
+        [roundEdges]="false"
+        (select)="onSelect($event)"
+        [animations]="false"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          <app-custom-chart-tooltip
+            [name]="model.series"
+            nameType="projectId"
+            [value]="model.value"
+            valueType="taskCost"
+            [seriesDate]="model.series"
+            typeOfData="seriesId"
+          ></app-custom-chart-tooltip>
+        </ng-template>
+      </ngx-charts-bar-vertical-2d>
+    </div>
+  </div>
+  <div class="row card pb-5 pe-4">
+    <h4 class="mt-3 pb-0 mb-0">
+      Grafica que muestra la rentabilidad de cada proyecto.
+    </h4>
+    <div class="card-body mt-0 pt-0 ">
+      <ngx-charts-bar-vertical
+        [view]="view"
+        (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.1)"
+        scheme="cool"
+        [results]="simpleDataProfitCost"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        legendTitle="Coste"
+        [legendPosition]="legendPosition"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisTickFormatting]="costYAxisTickFormatting"
+        [barPadding]="0"
+        [showDataLabel]="true"
+        [dataLabelFormatting]="costYAxisTickFormatting"
+        [roundDomains]="false"
+        [roundEdges]="false"
+        (select)="onSelect($event)"
+        [animations]="false"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          <app-custom-chart-tooltip
+            [name]="model.name"
+            nameType="projectId"
+            [value]="model.value"
+            valueType="taskCost"
+          ></app-custom-chart-tooltip>
+        </ng-template>
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+
+  <div class="row card pb-5">
+    <h4 class="mt-3 pb-0 mb-0">
+      Grafica que muestra el tiempo estimado frente al tiempo real de cada
+      proyecto.
+    </h4>
+    <div class="card-body mt-0 pt-0">
+      <ngx-charts-bar-vertical-2d
+        [view]="view"
+        (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.05)"
+        scheme="cool"
+        [results]="seriesDataTime"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        legendTitle="Tiempo"
+        [legendPosition]="legendPosition"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisTickFormatting]="timeYAxisTickFormatting"
+        [barPadding]="0"
+        [groupPadding]="1"
+        [showDataLabel]="true"
+        [dataLabelFormatting]="timeYAxisTickFormatting"
+        [roundDomains]="false"
+        [roundEdges]="false"
+        (select)="onSelect($event)"
+        [animations]="false"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          <app-custom-chart-tooltip
+            [name]="model.series"
+            nameType="projectId"
+            [value]="model.value"
+            valueType="timeSpent"
+            [seriesDate]="model.series"
+            typeOfData="seriesId"
+          ></app-custom-chart-tooltip>
+        </ng-template>
+      </ngx-charts-bar-vertical-2d>
+    </div>
+  </div>
+</div>

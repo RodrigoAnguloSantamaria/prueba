@@ -1,0 +1,44 @@
+<h3>{{data.title}}</h3>
+<form [formGroup]="anualForm" >
+<h3>Grabar Anualidad</h3>
+<div class="fila">
+<!-- AÑO -->
+<div class="form-group">
+    <label for="year">Año</label>
+    <input type="number" class="form-control form-control-sm" id="year" formControlName="year" />
+</div>
+
+<!-- UNIDADES -->
+<div class="form-group">
+    <label for="unidades">Unidades</label>
+    <input type="number" class="form-control form-control-sm" id="unidades" formControlName="unidades" />
+</div>
+<!-- IMPORTE -->
+<div class="form-group">
+    <label for="importe">Importe</label>
+    <input type="number" class="form-control form-control-sm" id="importe" formControlName="importe" />
+</div>
+</div>
+
+<h3>Deslizar Anualidad</h3>
+<div class="fila">
+    <!-- AÑO -->
+    <div class="form-group">
+        <label for="year2">Año</label>
+        <input type="number" class="form-control form-control-sm" id="year2" formControlName="year2" />
+    </div>
+    
+    <!-- UNIDADES -->
+    <div class="form-group">
+        <label for="unidades2">Unidades</label>
+        <input type="number" class="form-control form-control-sm" id="unidades2" formControlName="unidades2" />
+    </div>
+    <!-- IMPORTE -->
+    <div class="form-group">
+        <label for="importe2">Importe</label>
+        <input type="number" class="form-control form-control-sm" id="importe2" formControlName="importe2" />
+    </div>
+</div>
+<button type="submit" class="btn btn-primary m-2 btn-custom" [mat-dialog-close]="anualForm.value">Grabar anualidad</button>
+<button type="submit" class="btn btn-primary m-2 btn-custom" [mat-dialog-close]="false">Cancelar</button>
+</form>

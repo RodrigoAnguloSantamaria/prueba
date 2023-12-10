@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <form [formGroup]="workingDayForm" class="gap-3 text-center" (ngSubmit)="create()">
+    <div class="form-group">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Tarea</mat-label>
+        <mat-select
+          formControlName="taskTypeId"
+          placeholder="Tarea"
+          name="Tarea"
+        >
+          <mat-option *ngFor="let task of tasks" [value]="task">
+            {{ task | idToNamePipe }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Proyecto</mat-label>
+        <mat-select
+          formControlName="projectId"
+          placeholder="Proyecto"
+          name="Proyecto"
+        >
+          <mat-option *ngFor="let project of projects" [value]="project">
+            {{ project | idToNamePipe }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Fecha</mat-label>
+        <input
+          matInput
+          formControlName="workingDate"
+          placeholder="Fecha"
+          class="form-control"
+          type="date"
+          id="date"
+          name="workingDate"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Nº de horas de la tarea</mat-label>
+        <input
+          matInput
+          class="form-control"
+          formControlName="timeSpent"
+          placeholder="Nº de horas de la tarea"
+          type="number"
+          id="timeSpent"
+          name="timeSpent"
+          max="8"
+          min="0"
+        />
+      </mat-form-field>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-75"
+      [disabled]="!workingDayForm.valid"
+      *ngIf="actionBtn === 'Guardar'"
+    >
+      {{ actionBtn }}
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success w-75"
+      [disabled]="!workingDayForm.valid"
+      *ngIf="actionBtn === 'Editar'"
+    >
+      {{ actionBtn }}
+    </button>
+  </form>
+</div>

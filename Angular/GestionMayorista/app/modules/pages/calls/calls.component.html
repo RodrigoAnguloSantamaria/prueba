@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <div class="row gap-1">
+    <div class="col card border-primary p-0 text-center">
+      <h2 class="card-header bg-primary">Seleccione el archivo a subir</h2>
+      <div class="mb-2">
+        <mat-form-field>
+          <mat-label>Proyecto</mat-label>
+          <mat-select>
+            <mat-option value="option-1">Option-1</mat-option>
+            <mat-option value="option-2">Option-2</mat-option>
+            <mat-option value="option-3">Option-3</mat-option>
+            <mat-option value="option-4">Option-4</mat-option>
+          </mat-select>
+          <!-- <mat-hint align="end"></mat-hint> -->
+        </mat-form-field>
+      </div>
+
+      <form action="" method="post" enctype="multipart/form-data" class="partes-form">
+        <!-- <input
+          title="enviar"
+          type="file"
+          name="archivo"
+          accept=".pdf, .doc, .docx, .xls"
+          class="form-control mt-2"
+          (change)="handleFile($event)"
+        />
+        <div *ngIf="extensionError" class="error"><p>El archivo seleccionado  no es un archivo Excel</p></div>
+        <div *ngIf="sizeError" class="error"><p>El tamaño del archivo es mayor de 2 MB</p></div>
+        <input
+          type="submit"
+          (click)="uploadFile()"
+          value="Subir Archivo"
+          class="form-control mt-2 btn btn-primary bi-plus-circle pr-1"
+        /> -->
+        <button type="button" (click)="loadMultipleFiles()" class="form-control mt-2 btn btn-primary pr-1">Ver archivos
+          originales</button>
+        <button type="button" (click)="loadConvertedFiles()" class="form-control mt-2 btn btn-primary pr-1">Ver archivos
+          convertidos</button>
+      </form>
+      
+    </div>
+    <div class="col card border-primary p-0 ">
+      <h2 class="card-header bg-primary text-center">Lista de llamadas</h2>
+      <div class="container_table">
+        <table class="styled-table">
+          <tr>
+            <th>Nombre</th>
+            <th *ngIf="expression">Descarga</th>
+            <th *ngIf="expression"> <i class="bi bi-check-all clickIcon" (click)="selectAllChaeckboxes('descarga')"></i></th>
+             
+            
+            <th *ngIf="!expression">Convertir</th>
+            <th *ngIf="!expression"> <i class="bi bi-check-all clickIcon" (click)="selectAllChaeckboxes('convertir')"></i>
+            </th>
+              
+             
+
+          </tr>
+          <tr *ngFor="let archivo of archivos">
+            <td>{{archivo}}</td>
+            <td *ngIf="expression" class="celda">
+              <a [href]=" fileUrl + archivo"><i class="bi bi-arrow-down-square-fill custom-color"
+                  title="Descarga"></i></a>
+                  </td>
+                  <td *ngIf="expression" >
+              <input type="checkbox" value="{{archivo}}" (click)="changeSelectionDownload($event)">
+            </td>
+            <td *ngIf="!expression" class="celda">
+              <button mat-flat-button color="primary" (click)="convertOneFile(archivo)">Convertir
+              </button>
+            </td>
+            <td *ngIf="!expression" >
+              <input type="checkbox" value="{{archivo}}" (click)="changeSelectionConvert($event)">
+
+          </tr>
+        </table>
+        
+      </div>
+
+      <div *ngIf="!expression && archivos.length >0">
+        <button type="button" (click)="convertAllFiles()" ngClass="form-control mt-2 btn btn-primary pr-1">
+          Convertir todos</button>
+        <button type="button" [disabled]="filesConvert.length <2" (click)="convertOneFile(filesConvert)" ngClass="form-control mt-2 btn btn-primary pr-1">
+          Convertir seleccionados</button>
+
+      </div>
+      <div *ngIf="expression && archivos.length >0">
+        <button type="button" [disabled]="filesDownload.length <2" (click)="downloadNFiles()" ngClass="form-control mt-2 btn btn-primary pr-1">
+          Descargar seleccionados</button>
+      </div>
+    </div>
+    <!-- <span *ngIf="conversationMessage" [ngClass]="{'form-control mt-2 btn btn-danger pr-1':conversationOk , 'form-control mt-2 btn btn-success pr-1':!conversationOk}">{{conversationMessage}}</span> -->
+
+  </div>
+</div>

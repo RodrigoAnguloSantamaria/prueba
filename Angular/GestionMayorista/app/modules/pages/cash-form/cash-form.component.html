@@ -1,0 +1,90 @@
+<form [formGroup]="cashForm" (ngSubmit)="onSubmit()">
+    <h2 class="newH1Style mt-3"> Anticipo {{tipoAnticipo}}</h2>
+
+    <div class="container">
+        <div class="fila">
+            <!-- AÑO -->
+            <div class="form-group">
+                <label for="year">Año</label>
+                <input type="number" class="form-control form-control-sm" id="year" formControlName="year" />
+            </div>
+           
+            <!-- IMPORTE -->
+            <div class="form-group">
+                <label for="importe">Importe</label>
+                <input type="number" class="form-control form-control-sm" id="importe" formControlName="importe" />
+            </div>
+             <!-- CONCEPTO -->
+             <div class="form-group" style="flex-grow: 2;">
+                <label for="concepto">Concepto</label>
+                <input type="text" class="form-control form-control-sm col-6" id="concepto" formControlName="concepto"/>
+            </div>
+        </div>
+        
+        <div class="fila">
+            <!-- EMPRESA -->
+            <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input type="text" class="form-control form-control-sm" id="empresa" formControlName="empresa" />
+            </div>
+            <!-- ECONOMICA -->
+            <div class="form-group">
+                <label for="economica">Economica</label>
+                <input type="number" class="form-control form-control-sm" id="economica" formControlName="economica" />
+            </div>
+            <!-- PROVINCIA -->
+            <div class="form-group">
+                <label for="provincia">Provincia</label>
+                <input type="text" class="form-control form-control-sm" id="provincia" formControlName="provincia" />
+            </div>
+            <!-- LOCALIDAD -->
+            <div class="form-group">
+                <label for="localidad">Localidad</label>
+                <input type="text" class="form-control form-control-sm" id="localidad" formControlName="localidad" />
+            </div>
+          
+        </div>
+        <div class="fila">
+            <!-- FECHA AUTORIZACION -->
+            <div class="form-group">
+                <label for="fecha_autorizacion">Fecha de Autorización</label>
+                <input type="date" class="form-control form-control-sm" id="fecha_autorizacion"
+                    formControlName="fecha_autorizacion" />
+            </div>
+            <!-- FECHA PRESUPUESTO -->
+            <div class="form-group">
+                <label for="fecha_presupuesto">Fecha de Prsupuesto</label>
+                <input type="date" class="form-control form-control-sm" id="fecha_presupuesto"
+                    formControlName="fecha_presupuesto" />
+            </div>
+            <!-- FECHA ENVIO -->
+            <div class="form-group">
+                <label for="fecha_envio">Fecha de Envio</label>
+                <input type="date" class="form-control form-control-sm" id="fecha_envio"
+                    formControlName="fecha_envio" />
+            </div>
+            <!-- FECHA FACTURA -->
+            <div class="form-group">
+                <label for="fecha_factura">Fecha de Fáctura</label>
+                <input type="date" class="form-control form-control-sm" id="fecha_factura"
+                    formControlName="fecha_factura" />
+            </div>
+            <!-- NUM FACTURA -->
+            <div class="form-group">
+                <label for="numero_factura">Num. Fáctura</label>
+                <input type="number" class="form-control form-control-sm" id="numero_factura"
+                    formControlName="numero_factura" />
+            </div>
+        </div>
+        <div class="fila">
+            <!-- OBSERVACIONES -->
+            <div class="form-group">
+                <label for="observaciones">Observaciones</label>
+            </div>
+            <textarea class="form-control" name="observaciones" id="observaciones" cols="40" rows="2"
+                formControlName="observaciones"></textarea>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary btn-custom">Grabar anticipo {{tipoAnticipo}}</button>
+</form>

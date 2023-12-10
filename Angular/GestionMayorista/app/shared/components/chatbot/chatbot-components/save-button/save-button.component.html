@@ -1,0 +1,3 @@
+<button *ngIf="enableSaveBtn" mat-raised-button (click)="saveConversation()" disabled  matTooltip="Máximo de 5 conversaciones guardadas.">Guardar</button>
+<button *ngIf="!enableSaveBtn" mat-raised-button (click)="saveConversation()"  matTooltip="Guardar conversación.">Guardar</button>
+

@@ -1,0 +1,16 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.newStyle{
+  background-color: white  !important;
+  background: none !important;
+  color: black !important;
+  border-radius: 20px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+
+  
+}
+.logout-btn{
+  background:  var(--color-background) !important; 
+  color: white;
+}

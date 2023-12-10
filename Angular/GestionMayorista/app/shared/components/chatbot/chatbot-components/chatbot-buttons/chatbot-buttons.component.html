@@ -1,0 +1,6 @@
+<nav class="chatbot-btn">
+  <button mat-raised-button (click)="conversionAPdf()" [disabled]="!title" matTooltip="Exporta a PDF. Guardar necesario.">Exportar PDF</button>
+  <app-save-button [actualTitle]="title"></app-save-button>
+  <app-new-chat-button></app-new-chat-button>
+</nav>
+

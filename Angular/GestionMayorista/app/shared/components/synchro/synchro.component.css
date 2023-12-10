@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+    margin: 10px;
+  }
+  
+  table {
+    width: 100%;
+    text-align: center !important;
+  }
+  
+  :host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+  }
+  .mat-elevation-z8 {
+    overflow-x: auto;
+  }
+  /* Muestra siempre las flechas de ordenacion de las cabeceras  */
+  ::ng-deep
+    .mat-sort-header-container:not(.mat-sort-header-sorted)
+    .mat-sort-header-arrow {
+    opacity: 0.54 !important;
+    transform: translateY(0px) !important;
+  }
+  
+  

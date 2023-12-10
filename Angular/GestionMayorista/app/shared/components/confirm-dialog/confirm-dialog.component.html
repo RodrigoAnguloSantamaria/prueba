@@ -1,0 +1,81 @@
+<!-- Parte del header del dialogo -->
+<div class="header-container">
+  <!-- Iconografía -->
+
+  <!-- Success -->
+  <div class="icon" *ngIf="type == 'success'">
+    <img src="..\assets\images\icons\success.png" alt="success">
+  </div>
+
+  <!-- Error -->
+  <div class="icon" *ngIf="type == 'error'">
+    <img src="..\assets\images\icons\error.png" alt="error">
+  </div>
+
+  <!-- Info -->
+  <div class="icon" *ngIf="type == 'info'">
+    <img src="..\assets\images\icons\info.png" alt="info">
+  </div>
+
+  <!-- Confirm -->
+  <div class="icon" *ngIf="type == 'confirm'">
+    <img src="..\assets\images\icons\confirm.png" alt="confirm">
+  </div>
+
+  <!-- Data -->
+  <div class="icon" *ngIf="type == 'data'">
+    <img src="..\assets\images\icons\success.png" alt="success">
+  </div>
+
+  <!-- Alert -->
+  <div class="icon" *ngIf="type == 'alert'">
+    <img src="..\assets\images\icons\alert.png" alt="alert">
+  </div>
+<!-- Logo -->
+<div class="icon" *ngIf="data.type == 'logo'">
+  <img src="..\assets\images\logo_N_nomarca.png" alt="Nomarca">
+</div>
+
+  <!-- Título del dialogo -->
+  <div class="header">
+    <h2 mat-dialog-title>{{ data.title }}</h2>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- Botones -->
+<!-- Cualquier tipo de type -->
+<div mat-dialog-actions *ngIf="type !== 'alert'" [align]="'center'" class="m-0">
+  <button
+    mat-raised-button
+    class="mx-2 w-auto text-white btn btn-primary btn-custom"
+    [mat-dialog-close]="true"
+  >
+    Confirmar
+  </button>
+  <button
+  mat-raised-button
+  class="mx-2 w-auto btn btn-secondary"
+  [mat-dialog-close]="false">
+    Cancelar
+  </button>
+</div>
+
+<!-- Botones de tipo de alert -->
+<div mat-dialog-actions *ngIf="type == 'alert'" [align]="'center'" class="m-0">
+  <button
+    mat-raised-button
+    id="alert-btn"
+    class="mx-2 w-auto text-white btn"
+    [mat-dialog-close]="true"
+  >
+    Confirmar
+  </button>
+  <button
+  mat-raised-button
+  class="mx-2 w-auto btn btn-secondary"
+  [mat-dialog-close]="false">
+    Cancelar
+  </button>
+</div>

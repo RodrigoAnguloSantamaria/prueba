@@ -1,0 +1,133 @@
+<div *ngIf="dataSource.data.length !== 0">
+  <div class="mat-elevation-z8">
+    <!-- matTableExporter necesario para exportar la tabla -->
+    <!-- hiddenColumns array con los indices de las columnas que NO se exportaran en mi caso la de acciones -->
+    <table
+      mat-table
+      matSort
+      [dataSource]="dataSource"
+      class="full-width-table"
+      aria-label="Elements"
+      matTableExporter
+      #exporter="matTableExporter"
+    >
+      <!-- <ng-container matColumnDef="select"> </ng-container> -->
+      <ng-container
+        *ngFor="let column of columns"
+        [matColumnDef]="column.columnDef"
+      >
+        <div *ngIf="column.columnDef !== 'select'; else checkColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ column.header }}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ column.cell(row) | thousandsPipe }}{{ column.format }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            {{ column.footer | thousandsPipe }}{{ column.format }}
+          </td>
+        </div>
+
+        <ng-template #checkColumn>
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? toggleAllRows() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              [aria-label]="checkboxLabel()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? onRowSelectionChanged(row) : null"
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"
+            >
+            </mat-checkbox>
+          </td>
+          <td mat-footer-cell *matFooterCellDef>{{ column.footer }}</td>
+        </ng-template>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <!-- Cuando haces click en una fila marcar el checkbox -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+      ></tr>
+
+      <!-- Contenido que muestra cuando no hay datos -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay datos acorde con el filtro</td>
+      </tr>
+      <!-- Footer de la tabla -->
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+    <!-- Paginator de la tabla -->
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="5"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+  <!-- Exportacion de la tabla -->
+  <div class="btn-group gap-1 p-2">
+    <button mat-button disabled="" class="text-black p-1">
+      <mat-icon
+        color="primary"
+        matTooltip="Se exportaran todos los datos de la tabla con el orden en el que se encuentren"
+        matTooltipPosition="below"
+        matTool
+        style="font-size: 18px"
+        >info</mat-icon
+      >
+      Exportar tabla:
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="
+        exporter.exportTable('xlsx', {
+          fileName: 'proyectos',
+          sheet: 'proyectos',
+          Props: { Author: 'Javier Blanco' }
+        })
+      "
+    >
+      Excel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="
+        exporter.exportTable('csv', {
+          fileName: 'proyectos',
+          sheet: 'proyectos',
+          Props: { Author: 'Javier Blanco' }
+        })
+      "
+    >
+      Csv
+    </button>
+
+    <!-- <button
+        class="btn-outline-primary"
+        mat-raised-button
+        (click)="exporter.exportTable('json')"
+      >
+        Json
+      </button>
+      <button
+        class="btn-outline-primary"
+        mat-raised-button
+        (click)="exporter.exportTable('txt')"
+      >
+        Txt
+      </button> -->
+  </div>
+</div>

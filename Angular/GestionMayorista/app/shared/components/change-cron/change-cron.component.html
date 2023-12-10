@@ -1,0 +1,111 @@
+<div style="width: 100%;">
+
+<h1 class="text-center newH1Style mt-3">Automatizacion procesos</h1>
+
+<div class="container text-center">
+<p>
+  Introduce direccion de correo donde notificar el resultado de la tarea
+  <input title="email" type="email" [(ngModel)]="mailTo" name="mail" (input)="validEmail()" />
+</p>
+
+<button
+    type="button"
+    [disabled]=""
+    (click)="prueba()"
+    [disabled]="!mailIsValid"
+    class="w-75 m-3 btn-custom rounded"
+  >
+    Ejecutar ahora
+  </button>
+  <button
+    type="button"
+    [disabled]=""
+    (click)="showCron()"
+    class="w-75 m-3 btn-custom rounded"
+  >
+    Programar tarea
+  </button>
+  <button
+    type="button"
+    [disabled]=""
+    (click)="goSynchro()"
+    class="w-75 m-3 center btn-custom rounded"
+  >
+    Ver listado resumen tareas
+  </button>
+</div>
+</div>
+
+<!-- <label class="form-label "></label>
+<select title="selecciona tarea" class="form-select cron-form mb-3"
+  name="selectTask"
+  id="selectTask"
+  [(ngModel)]="selectTask"
+  (change)="taskSelected()"
+>
+<option value="" disabled selected hidden>Selecciona tarea</option>
+<ng-container *ngFor="let task of taskList">
+  <option [value]="task">{{ task }}</option>
+ </ng-container>
+</select> -->
+<div *ngIf="showCronForm">
+<form class="cron-form">
+  <div class="cron-form mb-3">
+    <label for="day" class="form-label">Ejecución actual</label>
+    <p>{{ newCronExpression }}</p>
+  </div>
+ 
+  <div class="mb-3">
+    <label for="day" class="form-label" matTooltip="Cada cuantos dias se ejecutará">Dias</label>
+    <input
+      class="form-control"
+      type="number"
+      matInput
+      placeholder="Dias"
+      id="day"
+      min="1"
+      max="31"
+      [(ngModel)]="day"
+      name="day"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="hour" class="form-label" matTooltip="Cada cuantas horas se ejecutará">Hora</label>
+    <input
+      class="form-control"
+      type="number"
+      matInput
+      placeholder="Hora"
+      id="hour"
+      min="0"
+      max="23"
+      [(ngModel)]="hour"
+      name="hour"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="minute" class="form-label" matTooltip="Cada cuantos minutos se ejecutará">Minuto</label>
+    <input
+      class="form-control"
+      type="number"
+      matInput
+      placeholder="Minuto"
+      id="minute"
+      min="0"
+      max="59"
+      [(ngModel)]="minute"
+      name="minute"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn-custom rounded w-75" (click)="updateCron()">
+    Actualizar
+  </button>
+  <!-- <button type="submit" class="btn btn-primary w-75" (click)="getCron()">
+    Obtener
+  </button> -->
+</form>
+</div>

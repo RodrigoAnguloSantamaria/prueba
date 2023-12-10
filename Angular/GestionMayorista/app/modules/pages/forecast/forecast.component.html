@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 class="text-center newH1Style mt-3">Forecast</h1>
+  <app-date-filter
+    (formValuesChanged)="onFormValuesChanged($event)"
+  ></app-date-filter>
+  <ng-container *ngIf="totalProjectsInfoData.length === 0; else elseTemplate">
+    <app-loading></app-loading>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="row w-100">
+      <app-projects-table></app-projects-table>
+    </div>
+    <div class="row mt-2">
+      <app-projects-charts></app-projects-charts>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+label{
+    font-weight: 500;
+}
+span {
+    margin-left: 30px;
+    font-size: 12px;
+    color: red;
+}
+table{
+    width: 100%;
+}
+
+.fila {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
+
+}
+
+.tabicon {
+    width: 30px;
+    cursor: pointer;
+}
+
+.newH1Style {
+    background-color: white !important;
+    background: white !important;
+    color: #00a3e0 !important;
+    text-align: start !important;
+    max-width: -webkit-fill-available;
+    width: 100vw;
+}
+
+.label_header {
+    background-color: rgb(187, 203, 243);
+    height: 25px;
+
+}
+.small-btn{
+padding: 0;
+height: 20px;
+   
+}

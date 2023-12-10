@@ -1,0 +1,55 @@
+<!-- Grid de cards -->
+<!-- <div class="container-fluid d-flex flex-wrap"> -->
+<div class="container-fluid">
+  <div class="row mb-0 w-100 text-center">
+    <h1>{{ nameType }}: {{ id | idToNamePipe }}</h1>
+  </div>
+  <app-date-filter></app-date-filter>
+  <!-- Fila 1 -->
+  <div class="row mb-4">
+    <!-- Card 1 -->
+    <div class="col-12 w-100 w-sm-50 mb-4" *ngIf="idType === 'projectId'">
+      <app-line-chart-by-dates [id]="id" [idType]="idType">
+      </app-line-chart-by-dates>
+    </div>
+    <!-- Card 2 -->
+    <div class="col-12 w-100 w-sm-50 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center">Datos totales actuales.</h2>
+          <!-- <p class="card-text text-center">
+            Recordamos que el el presupuesto (Coste estimado) del projecto
+            {{ id }} es de ___€ y el tiempo estimado es de ___h.
+            <br />
+            Ademas, en base a los datos actuales se preeve que el proyecto
+            finalize con un coste de ___€ y ___h.
+          </p> -->
+          <app-adv-pie-chart-group [id]="id"> </app-adv-pie-chart-group>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fila 2 -->
+  <!-- <div class="row mb-4">
+    Card 3
+    <div class="col-12 w-100 w-sm-50 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grafico que muestre el tiempo y coste que ha dedicado cada empleado a cada tipo de tarea.</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Stacked Vertical Barchart</a>
+        </div>
+      </div>
+    </div>
+    Card 4
+    <div class="col-12 w-100 w-sm-50 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grafico que muestre el tiempo y coste que se ha dedicado a cada tarea y cuanto cada empleado.</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Stacked Vertical Barchart</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

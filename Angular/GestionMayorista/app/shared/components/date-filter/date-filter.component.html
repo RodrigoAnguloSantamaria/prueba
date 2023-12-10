@@ -1,0 +1,99 @@
+<div class="row justify-content-around align-items-center m-2">
+  <div class="col-6">
+    <div class="btn-group just" role="group">
+      <!-- Filtros de fecha -->
+      <button
+        *ngIf="typeOfDateFilter !== 'all'"
+        type="button"
+        class="btn bi-arrow-left btn-danger h-50"
+        (click)="decreaseNumberOfDateType()"
+      ></button>
+
+      <mat-form-field appearance="fill" style="width: 300px">
+        <mat-label>Introduce el rango de fechas para filtrar</mat-label>
+        <div class="row">
+          <div class="col text-center" style="padding-top: 11px">
+            <mat-date-range-input
+              [formGroup]="dateRangeForm"
+              [rangePicker]="picker"
+            >
+              <input
+                matStartDate
+                formControlName="startDateISO"
+                placeholder="Fecha de inicio"
+              />
+              <input
+                matEndDate
+                formControlName="endDateISO"
+                placeholder="Fecha de fin"
+              />
+            </mat-date-range-input>
+          </div>
+          <div class="col-auto">
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </div>
+        </div>
+        <mat-hint>Formato fecha en Dia/Mes/Año</mat-hint>
+
+        <mat-error
+          *ngIf="
+            dateRangeForm.controls.startDateISO.hasError('matStartDateInvalid')
+          "
+          class="text-danger fs-6"
+        >
+          <i class="bi bi-exclamation-triangle-fill"></i>
+
+          Fecha de comienzo invalida</mat-error
+        >
+        <mat-error
+          *ngIf="
+            dateRangeForm.controls.endDateISO.hasError('matEndDateInvalid')
+          "
+          class="text-danger fs-6"
+        >
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          Fecha de fin invalida</mat-error
+        >
+      </mat-form-field>
+      <button
+        *ngIf="typeOfDateFilter !== 'all'"
+        type="button"
+        class="btn bi-arrow-right btn-success h-50"
+        (click)="increaseNumberOfDateType()"
+      ></button>
+    </div>
+  </div>
+  <div class="col-auto p-0">
+    <p>
+      Filtrar por:
+      <mat-button-toggle-group
+        [(ngModel)]="typeOfDateFilter"
+        (change)="setInitialNumberOfDateType()"
+        color="primary"
+      >
+        <mat-button-toggle value="all">Todos los datos</mat-button-toggle>
+        <mat-button-toggle value="month">Mes</mat-button-toggle>
+        <mat-button-toggle value="quarter">Trimestre</mat-button-toggle>
+      </mat-button-toggle-group>
+    </p>
+  </div>
+</div>
+<!-- <button
+        type="button"
+        class="btn btn-default"
+        disabled
+        *ngIf="typeOfDateFilter.valueOf() === 'month'; else isQuarter"
+      >
+        {{ getfilterMonth() }}
+      </button>
+      <ng-template #isQuarter>
+        <button type="button" class="btn btn-default" disabled>
+          Q{{ getfilterQuarter() }}
+        </button>
+      </ng-template>
+
+      <p>{{ startDate | customDatePipe }} - {{ endDate | customDatePipe }}</p> -->

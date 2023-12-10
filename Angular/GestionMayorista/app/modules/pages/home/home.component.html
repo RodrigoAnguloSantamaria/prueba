@@ -1,0 +1,174 @@
+<div class="row text-center newStyle mt-3">
+  <p class="text-primary">{{ currentDate }}</p>
+</div>
+<div class="row gap-4 justify-content-around m-2 p-0">
+  <div class="col-lg gap-4 justify-content-around text-center">
+    <div class="col-lg-12 col-md-4 card border-primary bg-light" style="flex-grow: 2;">
+      <h1 class="card-header color-button newH1Style">Eventos de seguimiento</h1>
+      <div class="card-body container_table">
+        <h3>
+          Próximos 7 dias
+          <i class="bi bi-arrow-down-square-fill mr-5"></i> Centro de Gasto
+          <i class="bi bi-arrow-down-square-fill ml-4"></i>
+        </h3>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Evento</th>
+              <th>Centro de Gasto</th>
+              <th>Nº Expediente</th>
+              <th>Lote</th>
+              <th>Título</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>29/06/2022</td>
+              <td>Mesa Técnica</td>
+              <td>SU</td>
+              <td>Z22SU017/P20</td>
+              <td>1</td>
+              <td>MOBILIARIO VARIADO</td>
+            </tr>
+            <tr>
+              <td>04/07/2022</td>
+              <td>Tope Muestras</td>
+              <td>AR</td>
+              <td>Z22AR003/M20</td>
+              <td>1</td>
+              <td>PISTOLAS PARA UNIDADES</td>
+            </tr>
+            <tr>
+              <td>06/07/2022</td>
+              <td>Mesa Económica</td>
+              <td>TE</td>
+              <td>Z22TE012/P20</td>
+              <td>1</td>
+              <td>TABLETS</td>
+            </tr>
+            <tr>
+              <td>06/07/2022</td>
+              <td>Mesa Técnica</td>
+              <td>SU</td>
+              <td>Z22SU019/D20</td>
+              <td>1</td>
+              <td>MOBILIARIO VARIADO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-light">
+        <button
+          [routerLink]="['/event-table']"
+          routerLinkActive="router-link-active"
+          class="ml-4  btn-custom" mat-flat-button color="primary"
+        >
+          <i class="bi-plus-circle pr-1"> </i> Eventos de seguimiento
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-4 card border-primary bg-light mt-2">
+      <h1 class="card-header newH1Style">Mensajes</h1>
+      <div class="card-body">
+        <div class="card-body container_table">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01/06/2022</td>
+                <td>
+                  Actualización V2.0.17: - Añadido al servicio MMR en la
+                  consulta de Ecofichas. - Cambio de tipos y tamaños de letra
+                  para una mejor vislualización en formularios.
+                </td>
+              </tr>
+              <tr>
+                <td>26/05/2022</td>
+                <td>
+                  Actualización V2.0.17: - Añadido al servicio MMR en la
+                  consulta de Ecofichas. - Cambio de tipos y tamaños de letra
+                  para una mejor vislualización en formularios.
+                </td>
+              </tr>
+              <tr>
+                <td>24/05/2022</td>
+                <td>
+                  Actualización V2.0.17: - Añadido al servicio MMR en la
+                  consulta de Ecofichas. - Cambio de tipos y tamaños de letra
+                  para una mejor vislualización en formularios.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer bg-light">
+        <button
+          [routerLink]="['/message-table']"
+          routerLinkActive="router-link-active"
+          class="ml-4  btn-custom" mat-flat-button color="primary"
+        >
+          <i class="bi-search pr-1"> </i> Ver mensajes
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row gap-4 justify-content-around text-center">
+    <div class="col-lg col-md-4 card border-primary bg-light">
+      <h1 class="card-header newH1Style">Estadisticas</h1>
+      <div class="card-body">
+        <div class="row">
+          <h3 class="card-title">
+            Accede al estadísticas para ver toda la actividad de la empresa.
+          </h3>
+        </div>
+        <div class="row">
+          <img height="70%"
+            class="card-img"
+            src="assets/images/estadisticas-entero.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="card-footer bg-light">
+        <button [routerLink]="['/statistic']" routerLinkActive="router-link-active" class="ml-4  btn-custom" mat-flat-button color="primary">
+        
+          <i class="bi-kanban pr-1"> </i> Estadisticas</button
+        >
+      </div>
+    </div>
+
+    <div class="col-lg col-md-4 card border-primary bg-light">
+      <h1 class="card-header newH1Style">Forecast</h1>
+      <div class="card-body">
+        <div class="row">
+          <h3 class="card-title">
+            Accede al forecast para ver toda la actividad de los proyectos de la
+            empresa.
+          </h3>
+        </div>
+        <div class="row">
+          <img
+            class="card-img"
+            src="assets/images/forecast-entero.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="card-footer bg-light">
+        <button [routerLink]="['/forecast']" routerLinkActive="router-link-active" class="ml-4  btn-custom" mat-flat-button color="primary">
+        
+          <i class="bi-kanban pr-1"> </i> Ir al forecast</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <img src="assets/images/home_temp.jpg" class="img-fluid" /> -->

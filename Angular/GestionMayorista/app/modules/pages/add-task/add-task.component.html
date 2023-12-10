@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row gap-1 min-vh-100">
+    <div class="col card border-primary p-0 text-center">
+      <h1 class="card-header bg-primary">
+        Rellene el formulario para guardar la tarea
+      </h1>
+      <div class="card-body">
+        <app-working-day></app-working-day>
+      </div>
+    </div>
+    <div class="col card border-primary p-0">
+      <h1 class="card-header bg-primary text-center mb-0">
+        Lista de tareas introducidas en esta semana
+      </h1>
+      <div class="card-body" style="height: 0px; overflow-y: auto">
+        <!-- <div class="card-body" style="height: 100%; overflow-y: auto"> -->
+        <ng-container *ngIf="weeklyWorkingday.length > 0; else elseTemplate">
+          <ul
+            class="list-group list-group-flush pb-0"
+            *ngFor="let workingDay of weeklyWorkingday"
+          >
+            <li class="list-group-item">
+              <div class="card">
+                <div class="card-header text-center mb-0">
+                  {{ workingDay.workingDate | customDatePipe }}
+                </div>
+                <div class="card-body pt-0 mt-0">
+                  <div class="row gap-2 my-2 ps-5">
+                    <ul
+                      *ngFor="
+                        let workingDayData of workingDay.workingDayDataList
+                      "
+                    >
+                      <div class="row align-items-center">
+                        <div class="col-auto">
+                          <!-- Boton de añadir  -->
+                          <button class="btn bg-primary" (click)="addSameTask(workingDayData)">
+                            <i class="bi bi-plus"></i>
+                          </button>
+                          <br />
+                          <!-- Boton de editar  -->
+                          <button class="btn bg-success" (click)="editTask(workingDay.id, workingDay.workingDate, workingDayData)">
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <li>
+                            <b>Proyecto:</b>
+                            {{ workingDayData.projectId | idToNamePipe }}
+                          </li>
+                          <li>
+                            <b>Tarea:</b>
+                            {{ workingDayData.taskId.substring(8,12) | idToNamePipe }}
+                          </li>
+                          <li><b>Horas: </b>{{ workingDayData.timeSpent }}h</li>
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  Horas totales del dia:
+                  {{ getTotalTimePerDay(workingDay.workingDate) }}h
+                </div>
+              </div>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <app-loading></app-loading>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

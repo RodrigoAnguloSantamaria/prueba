@@ -1,0 +1,46 @@
+<div class="card">
+  <div #ContainerRef class="card-body text-center">
+    <h2 class="card-title">
+      Grafico que muestra el coste acumulativo por fecha del projecto:
+      {{ id | idToNamePipe }}
+    </h2>
+    <p class="card-text text-primary">*{{ infoUserYAxisStatus }}.</p>
+
+    <ngx-charts-line-chart
+      [view]="view"
+      (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.05)"
+      scheme="vivid"
+      [results]="serie"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [yAxisLabel]="yAxisLabel"
+      [yAxisTickFormatting]="costYAxisTickFormatting"
+      [legend]="showLegend"
+      legendTitle="Datos:"
+      [legendPosition]="legendPosition"
+      [yScaleMax]="yScaleMax"
+      [yScaleMin]="yScaleMin"
+      [autoScale]="true"
+      [timeline]="true"
+      [animations]="false"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-line-chart>
+    <ul class="lh-1" style="font-size: small">
+      <br />
+      <p>
+        <sup class="text-dark fw-bold">[1] </sup><b>Estimados</b>: corresponde a
+        los datos estimados al principio del proyecto.
+      </p>
+      <p>
+        <sup class="text-dark fw-bold">[2] </sup><b>Actuales</b>: corresponde a
+        los datos que se han ido generando desde el inicio del proyecto.
+      </p>
+      <p>
+        <sup class="text-dark fw-bold">[3] </sup><b>Predecidos</b>: corresponde
+        a los datos que se han ido generando desde el inicio del proyecto.
+      </p>
+    </ul>
+  </div>
+</div>

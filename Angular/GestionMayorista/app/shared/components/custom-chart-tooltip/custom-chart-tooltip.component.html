@@ -1,0 +1,6 @@
+<h3>
+  <div><b>ID:</b> {{ nameId }} </div>
+  <div><b>Nombre:</b> {{ realName }} </div>
+  <div><b>Valor:</b> {{ valueString }}</div>
+  <div *ngIf="typeOfData === 'seriesDate'"><b>Fecha:</b> {{ seriesDate | customDatePipe}} <br /></div>
+</h3>

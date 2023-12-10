@@ -1,0 +1,84 @@
+<!-- class="vh-100" fuerza que mida toda la pagina y sea scrollable -->
+<mat-sidenav-container
+  [ngStyle]="{ 'background-color': 'accent' }"
+  class="vh-100"
+  autosize
+>
+  <!-- fixedInViewport="false" hace que este debajo del toolbar  -->
+  <mat-sidenav
+    #drawer
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    mode="side"
+    disableClose="true"
+    opened="true"
+  >
+  <span style="display: flex; justify-content: center; align-items: center; width: 100%; margin:10px 0px;">
+  <a href="gestion_mayorista/home" style="height: 50px; display: block; margin: 0;">
+    <img
+      [src]="!isExpanded ? 'assets/images/logo_nomarca.png' : 'assets/images/logo_N_nomarca.png'" 
+      [style]="!isExpanded ? 'width:200px; display:block; margin: 0;' : 
+      'width:40px; height:40px; display:block;margin-bottom:20px;'"
+      alt="logo"
+    />
+  
+  </a>
+</span>
+    <mat-toolbar class="newStyle">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        class="text-color"
+        (click)="isExpanded = !isExpanded"
+      >
+        <mat-icon aria-label="Side nav toggle icon" class="text-color"
+          >menu</mat-icon
+        >
+      </button>
+    </mat-toolbar>
+    <!-- Renderizacion de la lista de elementos del sidebar -->
+    <mat-nav-list [style.width.px]="!isExpanded ? '186px': '100%'" >
+
+        <mat-nav-list *ngFor="let item of sidebarItemsList; let i= index">
+        <ng-container *ngIf="item && hasAccess(item.accessRole)">
+          <ng-container *ngIf="item.children; then childrenBlock else singleBlock"> </ng-container>
+
+            <ng-template #childrenBlock>
+              <mat-expansion-panel style="box-shadow: none;">
+                <mat-expansion-panel-header >
+                  <mat-panel-title class="text-color" routerLinkActive="active-list-item" >
+                    <i class="text-color" [ngClass]="'me-2 bi ' + item.icon"></i>
+                    <span *ngIf="!isExpanded" class="text-color">{{item.title}}</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list class="text-color" style="display: flex; flex-direction: column; align-items: center;">
+                  <ng-container *ngFor="let children of item.children">
+                    <mat-list-item [routerLink]="children.route" class="text-color">
+                      <i class="text-color" [ngClass]="'me-2 bi ' + children.icon"></i>
+                      <span class="text-color" *ngIf="!isExpanded">{{ children.title }}</span>
+                    </mat-list-item>
+                  </ng-container>
+                </mat-nav-list>
+              </mat-expansion-panel>
+            </ng-template>
+            <ng-template #singleBlock>
+              <mat-list-item [routerLink]="item.route" class="text-color">
+                <i class="text-color" [ngClass]="'me-2 bi ' + item.icon"></i>
+                <span class="text-color" *ngIf="!isExpanded">{{ item.title }}</span>
+              </mat-list-item>
+            </ng-template>
+
+        </ng-container>
+      </mat-nav-list>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  
+  <mat-sidenav-content class="p-2 mb-3" style="height: calc(100% - 50px) !important;">
+    <app-dash-toolbar></app-dash-toolbar>
+    <!-- Aqui se renderizan las paginas -->
+    <router-outlet></router-outlet>
+    <app-chatbot *ngIf="hasAccess('GA-frontend-admin')"></app-chatbot>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,83 @@
+<div #ContainerRef class="container row gap-3 m-0 text-center">
+  <div
+    class="row card p-3 "
+    *ngIf="typeOfDateFilter === 'thisDay' || typeOfDateFilter === 'thisWeek'"
+  >
+    <h4>
+      Grafica que muestra el tiempo o el coste real que ha gastado cada persona,
+      proyecto o tarea en cada una del rango de fechas seleccionadas
+    </h4>
+    <ngx-charts-bar-vertical-2d
+      class="pb-5 "
+      [view]="[ContainerRef.offsetWidth / 1.05, 300]"
+      (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.05)"
+      scheme="vivid"
+      [results]="seriesData"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [showDataLabel]="true"
+      [legendTitle]="legendTitle"
+      [legendPosition]="legendPosition"
+      [yAxisTickFormatting]="yAxisTickFormatting"
+      [xAxisTickFormatting]="xAxisTickFormatting"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [barPadding]="0"
+      [groupPadding]="0"
+      [noBarWhenZero]="noBarWhenZero"
+      [roundDomains]="true"
+      [animations]="false"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <app-custom-chart-tooltip
+          [name]="model.name"
+          [nameType]="nameSelected"
+          [value]="model.value"
+          [valueType]="valueSelected"
+          [seriesDate]="model.series"
+          typeOfData="series"
+        ></app-custom-chart-tooltip>
+      </ng-template>
+    </ngx-charts-bar-vertical-2d>
+  </div>
+
+  <div class="row card p-3">
+    <h4>
+      Grafica que muestra el tiempo o el coste real total que ha gastado cada
+      persona, proyecto o tarea en cada fecha del rango de fechas seleccionadas.
+    </h4>
+    <ngx-charts-bar-vertical-stacked
+      [view]="[ContainerRef.offsetWidth / 1.05, 300]"
+      (window:resize)="resizeChart(ContainerRef.offsetWidth / 1.05)"
+      scheme="vivid"
+      [results]="seriesData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [showDataLabel]="true"
+      [legendTitle]="legendTitle"
+      [yAxisTickFormatting]="yAxisTickFormatting"
+      [xAxisTickFormatting]="xAxisTickFormatting"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [animations]="false"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <app-custom-chart-tooltip
+          [name]="model.name"
+          [nameType]="nameSelected"
+          [value]="model.value"
+          [valueType]="valueSelected"
+          [seriesDate]="model.series"
+          typeOfData="series"
+        ></app-custom-chart-tooltip>
+      </ng-template>
+    </ngx-charts-bar-vertical-stacked>
+  </div>
+</div>

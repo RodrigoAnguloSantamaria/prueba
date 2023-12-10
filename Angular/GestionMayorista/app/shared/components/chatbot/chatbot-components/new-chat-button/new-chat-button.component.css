@@ -1,0 +1,6 @@
+button{
+    font-size: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}

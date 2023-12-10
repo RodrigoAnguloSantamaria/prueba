@@ -1,0 +1,190 @@
+<div>
+  <h1 class="text-center newH1Style mt-3">Carga Automática Comprometido</h1>
+  <mat-form-field *ngFor="let filter of filterSelectObj" class="mx-3">
+    <ng-container
+      *ngIf="
+        filter.name !== 'Fecha inicio' && filter.name !== 'Fecha fin';
+        else elseTemplate
+      "
+    >
+      <mat-label>{{ filter.name }}</mat-label>
+      <input title="filter1"
+        matNativeControl
+        name="{{ filter.columnProp }}"
+        [(ngModel)]="filter.modelValue"
+        (keyup)="filterChange(filter, $event)"
+      />
+    </ng-container>
+    <ng-template #elseTemplate>
+      <mat-label>{{ filter.name }}</mat-label>
+      <input title="filter2"
+        matNativeControl
+        type="date"
+        name="{{ filter.columnProp }}"
+        [(ngModel)]="filter.modelValue"
+        (change)="filterChange(filter, $event)"
+      />
+    </ng-template>
+  </mat-form-field>
+  <br>
+  <button class="ml-4 btn-custom" mat-flat-button color="primary" (click)="resetFilters()">
+    Resetear filtros
+  </button>
+</div>
+
+<div class="mat-elevation-z8">
+  <!-- matTableExporter necesario para exportar la tabla -->
+  <!-- hiddenColumns array con los indices de las columnas que NO se exportaran en mi caso la de acciones -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="full-width-table"
+    aria-label="Elements"
+    matTableExporter
+    #exporter="matTableExporter"
+  >
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.fecha | customDatePipe }}
+      </td>
+    </ng-container>
+   
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Año</th>
+      <td mat-cell *matCellDef="let row">{{ row.year }}</td>
+    </ng-container>
+    <ng-container matColumnDef="expediente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expediente</th>
+      <td mat-cell *matCellDef="let row">{{ row.expediente }}</td>
+    </ng-container>
+    <ng-container matColumnDef="centroGasto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>centroGasto</th>
+      <td mat-cell *matCellDef="let row">{{ row.centroGasto }}</td>
+    </ng-container>
+    <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+      <td mat-cell *matCellDef="let row">{{ row.titulo}}</td>
+    </ng-container>
+    <ng-container matColumnDef="vinculante">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vinc.</th>
+      <td mat-cell *matCellDef="let row">{{ row.vinculante}}</td>
+    </ng-container>
+    <ng-container matColumnDef="economica">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Económica</th>
+      <td mat-cell *matCellDef="let row">{{ row.economica }}</td>
+    </ng-container>
+    <ng-container matColumnDef="rcYear">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>rcYear</th>
+      <td mat-cell *matCellDef="let row">{{ row.rcYear | currency:'EUR':'symbol':'1.2-2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rcDeslizado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>rcDeslizado</th>
+      <td mat-cell *matCellDef="let row">{{ row.rcDeslizado | currency:'EUR':'symbol':'1.2-2'  }}</td>
+    </ng-container>
+    <ng-container matColumnDef="dDeslizado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>dDeslizado</th>
+      <td mat-cell *matCellDef="let row">{{ row.dDeslizado | currency:'EUR':'symbol':'1.2-2' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="aDeslizado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>aDeslizado</th>
+      <td mat-cell *matCellDef="let row">{{ row.aDeslizado | currency:'EUR':'symbol':'1.2-2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="ok">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ok</th>
+      <td mat-cell *matCellDef="let row">{{ row.ok | currency:'EUR':'symbol':'1.2-2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rcNegativo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>rcNegativo</th>
+      <td mat-cell *matCellDef="let row">{{ row.rcNegativo | currency:'EUR':'symbol':'1.2-2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="sinJustificar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>sinJustificar</th>
+      <td mat-cell *matCellDef="let row">{{ row.sinJustificar | currency:'EUR':'symbol':'1.2-2'}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <!-- <ng-container matColumnDef="acciones">
+      <th class="text-center" mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell [ngStyle]="{ align: 'center' }" *matCellDef="let row">
+        <button (click)="editFile(row)" mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteCash(row)" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <!-- Lo que se muestra cuando no hay datos con los filtros -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay datos acorde con el filtro</td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
+
+<!-- Exportacion de la tabla -->
+<div class="btn-group gap-1 p-2">
+  <button mat-button disabled="" class="text-black p-1">
+    <mat-icon
+      color="primary"
+      matTooltip="Se exportaran todos los datos de la tabla filtrados y con el orden en el que se encuentren"
+      matTooltipPosition="above"
+      matTool
+      style="font-size: 18px"
+      >info</mat-icon
+    >
+    Exportar tabla:
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="
+      exporter.exportTable('xlsx', {
+        fileName: 'jornadas',
+        sheet: 'jornadas',
+        Props: { Author: 'Javier Blanco' }
+      })
+    " class="btn-custom"
+  >
+    Excel
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="
+      exporter.exportTable('csv', {
+        fileName: 'jornadas',
+        sheet: 'jornadas',
+        Props: { Author: 'Javier Blanco' }
+      })
+    " class="btn-custom"
+  >
+    Csv
+  </button>
+
+  <!-- <button
+      class="btn-outline-primary"
+      mat-raised-button
+      (click)="exporter.exportTable('json')"
+    >
+      Json
+    </button>
+    <button
+      class="btn-outline-primary"
+      mat-raised-button
+      (click)="exporter.exportTable('txt')"
+    >
+      Txt
+    </button> -->
+</div>

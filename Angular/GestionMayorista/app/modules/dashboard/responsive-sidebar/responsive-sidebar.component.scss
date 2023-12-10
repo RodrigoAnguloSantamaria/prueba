@@ -1,0 +1,19 @@
+
+.active-list-item {
+  color: var(--color-element) !important; /* Note: You could also use a custom theme */
+  // background-color: #5c6770 !important;
+  background-color:  var(--color-background) !important; 
+}
+
+::ng-deep .mat-sidenav{
+  // background: #373b3e;
+  background: var(--color-background) !important; 
+}
+
+.mat-expansion-panel{
+  // background: #373b3e;
+  background:  var(--color-background) !important; 
+}
+.newStyle{
+  background-color: var(--color-background) !important; 
+}
